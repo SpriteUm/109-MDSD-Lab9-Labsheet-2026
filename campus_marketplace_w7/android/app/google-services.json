@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "716152016842",
+    "project_id": "campus-marketplace-2026-nawa",
+    "storage_bucket": "campus-marketplace-2026-nawa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716152016842:android:2ff02231918e0bbb2b4933",
+        "android_client_info": {
+          "package_name": "com.example.campus_marketplace_w7"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC_q4kBxZs88f6C9fZQxXoehrL3WerPT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

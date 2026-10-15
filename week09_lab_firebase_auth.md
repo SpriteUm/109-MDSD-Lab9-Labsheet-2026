@@ -39,6 +39,7 @@
 ```text
 บันทึกรูปผลลัพธ์ที่นี่
 ```
+![alt text](image.png)
 
 ### ขั้นตอนที่ 1.2: 🔧 ทำตามขั้นตอน — ติดตั้งเครื่องมือและเชื่อมโปรเจกต์ด้วย FlutterFire CLI
 
@@ -167,7 +168,10 @@ Future<void> main() async {
 ```text
 บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบายของแต่ละกรณี
 ```
-
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
 ---
 
 ## ส่วนที่ 3: เข้าสู่ระบบด้วย Google Sign-In
