@@ -12,7 +12,20 @@
           "package_name": "com.example.campus_marketplace_w7"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "716152016842-3rmmu8s6bjegapseli9jlup60de6kqav.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.campus_marketplace_w7",
+            "certificate_hash": "17cd5a6cfd006fc79fa242a5dfdc881d64c6d89a"
+          }
+        },
+        {
+          "client_id": "716152016842-qmckc4nnu50bu22ve5o8m93ui8l5d4lg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCC_q4kBxZs88f6C9fZQxXoehrL3WerPT4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716152016842-qmckc4nnu50bu22ve5o8m93ui8l5d4lg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "716152016842-eke35i8t8sb1rjhame365ah44fe1go87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.campusMarketplaceW7"
+              }
+            }
+          ]
         }
       }
     }

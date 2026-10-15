@@ -3,31 +3,41 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+import 'database/app_database.dart';
 import 'models/cart_model.dart';
-import 'screens/login_page.dart';
+import 'repositories/item_repository_api.dart';
+import 'repositories/favorites_repository_drift.dart';
+import 'repositories/listing_draft_repository_drift.dart';
+import 'screens/auth_gate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  final db = AppDatabase();
   runApp(
     ChangeNotifierProvider<CartModel>(
       create: (context) => CartModel(),
-      child: const MyApp(),
+      child: MyApp(db: db),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppDatabase db;
+
+  const MyApp({super.key, required this.db});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Campus Marketplace',
       debugShowCheckedModeBanner: false,
-      // Temporary for testing steps 2.3 and 3.1; replace with AuthGate in part 4.
-      home: const LoginPage(),
+      home: AuthGate(
+        itemRepositories: [ItemRepositoryApi()],
+        favoritesRepository: FavoritesRepositoryDrift(db),
+        draftRepository: ListingDraftRepositoryDrift(db),
+      ),
     );
   }
 }

@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
+  static Future<void>? _googleInitialization;
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
   Future<void> signUp({required String email, required String password}) async {
     try {
@@ -30,13 +34,37 @@ class AuthService {
     }
   }
 
+  Future<void> _ensureGoogleReady() =>
+      _googleInitialization ??= _googleSignIn.initialize();
+
+  Future<void> signInWithGoogle() async {
+    try {
+      await _ensureGoogleReady();
+
+      final googleUser = await _googleSignIn.authenticate();
+      final idToken = googleUser.authentication.idToken;
+      final authorization = await googleUser.authorizationClient
+          .authorizationForScopes(['email']);
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: idToken,
+        accessToken: authorization?.accessToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (error) {
+      throw AuthServiceException(_messageFor(error.code));
+    }
+  }
+
   String _messageFor(String code) {
     return switch (code) {
       'email-already-in-use' => 'อีเมลนี้ถูกใช้สมัครสมาชิกแล้ว',
       'weak-password' =>
         'รหัสผ่านสั้นหรือคาดเดาง่ายเกินไป (ต้องมีอย่างน้อย 6 ตัวอักษร)',
       'invalid-email' => 'รูปแบบอีเมลไม่ถูกต้อง',
-      'invalid-credential' ||
+      'invalid-credential' =>
+        'ข้อมูลยืนยันตัวตนจาก Google ไม่ถูกต้องหรือหมดอายุ กรุณาลองเข้าสู่ระบบใหม่',
       'invalid-login-credentials' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
       'user-not-found' => 'ไม่พบบัญชีผู้ใช้นี้',
       'wrong-password' => 'รหัสผ่านไม่ถูกต้อง',

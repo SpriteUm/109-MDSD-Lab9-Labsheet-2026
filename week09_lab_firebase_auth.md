@@ -165,9 +165,14 @@ Future<void> main() async {
 
 > ✅ **Checkpoint 2.1** ทดสอบสมัครสมาชิกด้วย Email ใหม่สำเร็จ ถ่ายภาพหน้าจอ Firebase Console เมนู Authentication → Users ที่แสดงบัญชีที่เพิ่งสมัคร จากนั้นทดสอบกรณีผิดพลาด 2 กรณี คือ (ก) สมัครซ้ำด้วย Email เดิม และ (ข) ใส่รหัสผ่านสั้นเกินไป ถ่ายภาพหน้าจอข้อความ Error ทั้งสองกรณี พร้อมอธิบายว่าโค้ดส่วนใดใน `auth_service.dart` เป็นตัวจัดการแต่ละกรณี
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบายของแต่ละกรณี
-```
+**คำอธิบาย**
+
+- สมัครสมาชิกสำเร็จ: `AuthService.signUp()` เรียก `createUserWithEmailAndPassword()` เพื่อสร้างบัญชีด้วยอีเมลและรหัสผ่าน เมื่อสำเร็จบัญชีใหม่จะแสดงใน Firebase Console → Authentication → Users
+- สมัครซ้ำด้วยอีเมลเดิม: Firebase ส่ง `FirebaseAuthException` ที่มี code `email-already-in-use` กลับมา จากนั้น `try/catch` ใน `signUp()` จับ exception และส่ง code ไปแปลใน `_messageFor()` ซึ่งแสดงข้อความ “อีเมลนี้ถูกใช้สมัครสมาชิกแล้ว”
+- รหัสผ่านสั้นเกินไป: Firebase ส่ง code `weak-password` และ `signUp()` จับ exception แบบเดียวกัน ก่อน `_messageFor()` แปลเป็นข้อความ “รหัสผ่านสั้นหรือคาดเดาง่ายเกินไป (ต้องมีอย่างน้อย 6 ตัวอักษร)”
+
+ใน `LoginPage._submit()` จะจับ `AuthServiceException` แล้วนำข้อความภาษาไทยที่แปลแล้วไปแสดงในฟอร์ม
+
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 ![alt text](image-3.png)
@@ -182,7 +187,16 @@ Google Sign-In บน Android ต้องลงทะเบียน SHA-1 Fing
 
 **1) หา SHA-1 Fingerprint ของเครื่อง**
 
-เปิด Terminal ที่ root ของโปรเจกต์ (`campus_marketplace_w7`) แล้วรัน
+เปิด Terminal ที่ root ของโปรเจกต์ (`campus_marketplace_w7`) แล้วรันคำสั่งตามชนิด Terminal ที่ใช้
+
+**Windows PowerShell**
+
+```powershell
+cd android
+.\gradlew signingReport
+```
+
+**macOS / Linux หรือ Git Bash**
 
 ```bash
 cd android && ./gradlew signingReport

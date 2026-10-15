@@ -4,6 +4,7 @@ import '../models/item.dart';
 import '../models/cart_model.dart';
 import '../repositories/item_repository.dart';
 import '../repositories/favorites_repository.dart';
+import '../services/auth_service.dart';
 import 'checkout_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,6 +45,11 @@ class _HomePageState extends State<HomePage> {
               context,
               MaterialPageRoute(builder: (_) => const CheckoutPage()),
             ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'ออกจากระบบ',
+            onPressed: () => AuthService().signOut(),
           ),
         ],
       ),
