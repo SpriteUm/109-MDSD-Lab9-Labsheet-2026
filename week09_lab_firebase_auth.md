@@ -815,17 +815,28 @@ service cloud.firestore {
 ```text
 บันทึกรูปผลลัพธ์ที่นี่ 
 ```
+
 1. ล็อกอินค้างไว้ แล้วปิดแอปทิ้งไปทั้งหมด (ไม่ใช่แค่ย่อ) จากนั้นเปิดแอปใหม่อีกครั้ง — ควรเข้าหน้า `MainScaffold` ทันทีโดยไม่ต้องล็อกอินซ้ำ (Firebase Auth จำสถานะล็อกอินไว้ให้อัตโนมัติ)
-![alt text](image/image-19.png)![alt text](image/image-20.png)
+
+![alt text](image/image-19.png)
+![alt text](image/image-20.png)
+
 
 2. ปิด WiFi/Data ของเครื่องให้หมด แล้วลองเปิดแท็บ "รายการโปรด" และ "ร่างของฉัน" — ควรยังใช้งานได้ปกติเพราะเก็บอยู่ใน Local Database (Drift) ไม่ต้องพึ่งเครือข่าย
-![alt text](image/image-21.png)![alt text](image/image-22.png)
+
+![alt text](image/image-21.png)
+![alt text](image/image-22.png)
+
 
 3. ขณะยังปิดเครือข่ายอยู่ ลองกด "โพสต์ขายจริง" กับร่างสักชิ้น — ควรเกิด Error เพราะ Firestore/Storage ต้องการเครือข่ายเสมอ (ต่างจาก Local Database) ตรวจสอบว่าแอปแสดงข้อความ Error ที่เข้าใจได้ ไม่ Crash
+
 ![alt text](image/image-23.png)
 
+
 4. เปิดเครือข่ายกลับมา แล้วลองกด "โพสต์ขายจริง" รายการเดิมอีกครั้ง — ควรสำเร็จตามปกติ
-![alt text](image/image-24.png)![alt text](image/image-25.png)
+
+![alt text](image/image-24.png)
+![alt text](image/image-25.png)
 ---
 
 ## ปัญหาที่พบบ่อยและวิธีแก้ไข (Troubleshooting)
