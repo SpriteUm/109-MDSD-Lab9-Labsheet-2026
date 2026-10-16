@@ -820,7 +820,7 @@ service cloud.firestore {
 
 ![alt text](image/image-19.png)
 ![alt text](image/image-20.png)
-
+![alt text](image/image-20.png)
 
 2. ปิด WiFi/Data ของเครื่องให้หมด แล้วลองเปิดแท็บ "รายการโปรด" และ "ร่างของฉัน" — ควรยังใช้งานได้ปกติเพราะเก็บอยู่ใน Local Database (Drift) ไม่ต้องพึ่งเครือข่าย
 
