@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../models/cart_model.dart';
+import '../widgets/product_image.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
@@ -21,19 +23,17 @@ class CheckoutPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = cart.items[index];
                       return ListTile(
-                        leading: Image.network(
-                          item.imageUrl,
+                        leading: ProductImage(
+                          imageUrl: item.imageUrl,
                           width: 48,
                           height: 48,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.broken_image),
                         ),
                         title: Text(item.title),
                         subtitle: Text('${item.price} บาท'),
                         trailing: IconButton(
                           icon: const Icon(Icons.remove_circle_outline),
-                          onPressed: () => context.read<CartModel>().remove(item),
+                          onPressed: () =>
+                              context.read<CartModel>().remove(item),
                         ),
                       );
                     },
@@ -46,10 +46,15 @@ class CheckoutPage extends StatelessWidget {
                     children: [
                       Text(
                         'รวมทั้งหมด: ${cart.totalPrice.toStringAsFixed(2)} บาท',
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       ElevatedButton(
-                        onPressed: cart.items.isEmpty ? null : () => cart.clear(),
+                        onPressed: cart.items.isEmpty
+                            ? null
+                            : () => cart.clear(),
                         child: const Text('ล้างตะกร้า'),
                       ),
                     ],

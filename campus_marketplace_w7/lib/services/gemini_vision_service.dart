@@ -83,8 +83,7 @@ class GeminiVisionService {
             response.statusCode == 503 ||
             response.statusCode == 504) {
           throw Exception(
-            'Gemini API ยังไม่พร้อมให้บริการหลังลองใหม่ $_maxAttempts ครั้ง '
-            '(สถานะ ${response.statusCode}) กรุณารอสักครู่แล้วลองอีกครั้ง',
+            'Gemini API (สถานะ ${response.statusCode}): ${response.body}',
           );
         }
         throw Exception(

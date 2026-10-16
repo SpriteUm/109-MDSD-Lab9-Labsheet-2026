@@ -52,6 +52,9 @@ class _SellItemPageState extends State<SellItemPage> {
   Future<void> _pickImage() async {
     final XFile? pickedFile = await _picker.pickImage(
       source: ImageSource.gallery,
+      maxWidth: 800,
+      maxHeight: 800,
+      imageQuality: 80,
     );
     if (pickedFile == null) return;
 
@@ -222,6 +225,14 @@ class _SellItemPageState extends State<SellItemPage> {
               icon: const Icon(Icons.auto_awesome),
               label: const Text('ให้ AI ช่วยแนะนำ'),
             ),
+            if (_imageFile != null && !_showForm) ...[
+              const SizedBox(height: 8),
+              TextButton.icon(
+                onPressed: () => setState(() => _showForm = true),
+                icon: const Icon(Icons.edit_note),
+                label: const Text('หรือ กรอกข้อมูลด้วยตนเอง'),
+              ),
+            ],
 
             if (_isAnalyzing) ...[
               const SizedBox(height: 16),

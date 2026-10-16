@@ -57,22 +57,24 @@ class DefaultFirebaseOptions {
     projectId: 'campus-marketplace-2026-nawa',
     storageBucket: 'campus-marketplace-2026-nawa.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCTHD9uu56ihlBNGhEIic_UotaH3kntX1E',
     appId: '1:716152016842:ios:1145e18d1509f3e02b4933',
     messagingSenderId: '716152016842',
     projectId: 'campus-marketplace-2026-nawa',
     storageBucket: 'campus-marketplace-2026-nawa.firebasestorage.app',
+    androidClientId: '716152016842-3rmmu8s6bjegapseli9jlup60de6kqav.apps.googleusercontent.com',
+    iosClientId: '716152016842-eke35i8t8sb1rjhame365ah44fe1go87.apps.googleusercontent.com',
     iosBundleId: 'com.example.campusMarketplaceW7',
   );
-
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCTHD9uu56ihlBNGhEIic_UotaH3kntX1E',
     appId: '1:716152016842:ios:1145e18d1509f3e02b4933',
     messagingSenderId: '716152016842',
     projectId: 'campus-marketplace-2026-nawa',
     storageBucket: 'campus-marketplace-2026-nawa.firebasestorage.app',
+    androidClientId: '716152016842-3rmmu8s6bjegapseli9jlup60de6kqav.apps.googleusercontent.com',
+    iosClientId: '716152016842-eke35i8t8sb1rjhame365ah44fe1go87.apps.googleusercontent.com',
     iosBundleId: 'com.example.campusMarketplaceW7',
   );
 

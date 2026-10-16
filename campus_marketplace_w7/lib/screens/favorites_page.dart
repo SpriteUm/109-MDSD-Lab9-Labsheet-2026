@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../database/app_database.dart';
 import '../repositories/favorites_repository.dart';
+import '../widgets/product_image.dart';
 
 class FavoritesPage extends StatefulWidget {
   final FavoritesRepository repository;
@@ -47,9 +48,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
       );
     } catch (error) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('ลบรายการโปรดไม่สำเร็จ: $error')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('ลบรายการโปรดไม่สำเร็จ: $error')));
     }
   }
 
@@ -95,13 +96,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
             itemBuilder: (context, index) {
               final favorite = favorites[index];
               return ListTile(
-                leading: Image.network(
-                  favorite.imageUrl,
+                leading: ProductImage(
+                  imageUrl: favorite.imageUrl,
                   width: 48,
                   height: 48,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.broken_image),
                 ),
                 title: Text(favorite.title),
                 subtitle: Text('${favorite.price} บาท'),
