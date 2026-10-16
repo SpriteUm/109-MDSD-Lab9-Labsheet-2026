@@ -585,7 +585,16 @@ Widget build(BuildContext context) {
 ก่อนเขียนโค้ด ให้ตอบคำถามต่อไปนี้ (อ้างอิง `campus_marketplace_lab_roadmap.md` ข้อ 5.6 และเนื้อหาหัวข้อ 9.5):
 
 1. ทำไมเราจึง "เพิ่ม Implementation ใหม่" (`ItemRepositoryFirestore`) แทนที่จะแก้ไข `ItemRepositoryApi` เดิม หรือเขียนโค้ดเรียก Firestore ตรงจาก `HomePage`?
+คำตอบ:
+- ปฏิบัติตามหลัก Open/Closed Principle (OCP) ใน SOLID Principles: โค้ดควรเปิดให้ขยายได้ (Open for extension) แต่ปิดไม่ให้แก้ไขส่วนที่ใช้งานได้ดีอยู่แล้ว (Closed for modification) การสร้าง Implementation ใหม่ทำให้ `ItemRepositoryApi` ยังคงทำงานดึงข้อมูลสินค้าตัวอย่างจาก Fake Store API ได้ตามปกติโดยไม่กระทบกระเทือน และทำให้แอปสามารถทำงานร่วมกัน 2 แหล่งข้อมูลพร้อมกันได้ (Multi-repository)
+- การแยกความรับผิดชอบ (Separation of Concerns & Decoupling): หากเขียนเรียก Firestore ตรงใน `HomePage` จะทำให้ UI ผูกติดกับ Database โดยตรง (Tight Coupling) ทดสอบ (Unit Test/Mock) ได้ยาก และหากวันข้างหน้าเปลี่ยนวิธีเก็บข้อมูล จะต้องไล่รื้อโค้ดในหน้า UI ทั้งหมด การมี Repository ช่วยทำหน้าที่เป็นตัวกลางแปลงและส่งต่อข้อมูลให้ UI โดยที่ UI ไม่จำเป็นต้องรู้ว่าข้อมูลมาจากไหน
+
 2. ถ้าในอนาคตอาจารย์สั่งให้เปลี่ยนจาก Fake Store API ไปใช้ API อื่น ต้องแก้ไฟล์กี่ไฟล์ ถ้าทุก Widget เรียกผ่าน Interface `ItemRepository` เท่านั้น?
+คำตอบ:
+- แก้ไขเพียง 1-2 ไฟล์เท่านั้น คือ:
+  1. ไฟล์ Repository Implementation: สร้างคลาสใหม่ (เช่น `ItemRepositoryNewApi.dart`) หรือแก้โค้ดเฉพาะภายใน `ItemRepositoryApi.dart` ที่ทำหน้าที่ต่อกับ Network/API
+  2. จุดตั้งต้น Dependency Injection (ถ้าสร้างคลาสใหม่): แก้ไขเพียงบรรทัดที่ส่งต่อ Repository เช่น ใน `main.dart` หรือ `auth_gate.dart`
+- โดยไม่ต้องแก้ไขไฟล์ Widget หรือหน้า UI (`HomePage` `MainScaffold` `ProductCard` ฯลฯ) เลยแม้แต่ไฟล์เดียว เพราะทุก Widget เรียกผ่าน Interface `ItemRepository` เดียวกันอยู่แล้ว
 
 ```text
 บันทึกคำตอบของคุณที่นี่
