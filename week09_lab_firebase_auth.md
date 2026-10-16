@@ -574,8 +574,8 @@ Widget build(BuildContext context) {
    - หาก `snapshot.data == null` (ยังไม่ล็อกอินหรือกดออกจากระบบ) $\rightarrow$ ส่งคืน `LoginPage()`
    - หาก `snapshot.data != null` (มี User ที่ล็อกอินแล้ว) $\rightarrow$ ส่งคืน `MainScaffold(...)`
    - หากยังอยู่ในช่วงเริ่มต้นตรวจสอบสถานะ (`ConnectionState.waiting`) $\rightarrow$ แสดง `CircularProgressIndicator()`
-
 ทำให้หน้าจอที่แสดงผลอยู่ถูกปรับเปลี่ยนไปตาม "สถานะจริงของข้อมูล (State)" ณ ขณะนั้นโดยอัตโนมัติ ส่งผลให้โครงสร้างโค้ดแยกส่วนกันอย่างชัดเจน (Decoupling) ตัวหน้า `LoginPage` หรือปุ่ม Sign Out ใน `HomePage` มีหน้าที่เพียงแค่สั่งการกับ Auth Service เท่านั้น ไม่จำเป็นต้องรู้ว่าหน้าถัดไปคืออะไร และไม่ต้องจัดการ Navigation Stack ด้วยตนเอง
+
 ---
 
 ## ส่วนที่ 5: ขยาย Repository Pattern ด้วย ItemRepositoryFirestore
