@@ -673,6 +673,7 @@ final pages = [
 บันทึกรูปผลลัพธ์ที่นี่
 ```
 ![alt text](image/image-11.png)
+
 **คำอธิบาย:**
 การออกแบบให้ `HomePage` ผูกติดอยู่กับ Interface (Abstract Class) `ItemRepository` เพียงอย่างเดียว โดยไม่รู้จัก Implementation อย่าง `ItemRepositoryApi` หรือ `ItemRepositoryFirestore` โดยตรง เป็นไปตามหลักการ **Repository Pattern** และ **Dependency Inversion Principle (DIP)** ซึ่งช่วยให้ระบบมีความยืดหยุ่นสูงในสองมิติสำคัญ:
 
